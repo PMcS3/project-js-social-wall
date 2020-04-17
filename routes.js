@@ -1,25 +1,27 @@
 let Router = require('express-promise-router');
 let { Message } = require('./models');
 let { ValidationError } = require('objection');
+var $ = require('jQuery');
 
 let router = new Router();
 
 // GET /
 router.get('/', async(request, response) => {
   let messages = await Message.query().select('*').orderBy('created_at', 'DESC');
-
-  response.render('index', { messages });
+  response.render('index', {messages});
 });
 
 // POST /messages
 router.post('/messages', async(request, response) => {
   let messageBody = request.body.body;
   let messageTime = new Date();
+  let messageLikes = request.body.likes;
 
   try {
     await Message.query().insert({
       body: messageBody,
       createdAt: messageTime,
+      likes: messageLikes,
     });
 
     response.redirect('/');
@@ -34,5 +36,11 @@ router.post('/messages', async(request, response) => {
     }
   }
 });
+
+/*$(document).on("click", ".likeButton", function(e) {
+  e.preventDefault();
+  console.log('Button Clicked');
+});
+*/
 
 module.exports = router;
