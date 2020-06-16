@@ -6,8 +6,9 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let express = require('express');
 
-let app = express();
 
+let app = express();
+app.use(express.static(__dirname + '/static'));
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = app.get('env');
 }
@@ -27,7 +28,7 @@ app.set('views', app.root('views'));
 app.set('view engine', 'hbs');
 
 // Put static files like stylesheets in public/
-app.use(express.static(app.root('public')));
+app.use("/static", express.static('./static/'));
 
 // Use a different log format for development vs. production
 if (app.inDevelopment()) {

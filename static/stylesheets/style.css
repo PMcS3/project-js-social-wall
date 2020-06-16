@@ -50,6 +50,10 @@ body {
   border-radius: .25rem;
 }
 
+button {
+  margin-bottom: 20px;
+}
+
 .notice.error {
   color: #721c24;
   background-color: #f8d7da;

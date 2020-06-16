@@ -20,11 +20,12 @@ class Message extends Model {
     return {
       type: 'object',
       required: [
-        'body',
+        'body'
       ],
       properties: {
         id: { type: 'integer' },
-        body: { type: 'string', minLength: 1 }
+        body: { type: 'string', minLength: 1 },
+        likes: { type: 'integer' },
       }
     };
   }
